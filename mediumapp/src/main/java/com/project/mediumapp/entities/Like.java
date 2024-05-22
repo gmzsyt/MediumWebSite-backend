@@ -11,6 +11,8 @@ import org.hibernate.annotations.OnDeleteAction;
 @Data
 public class Like {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     Long id;
     @ManyToOne(fetch = FetchType.LAZY) // many-> like, one -> bir post için bir sürü like olabilir
     @JoinColumn (name = "post_id",nullable = false)

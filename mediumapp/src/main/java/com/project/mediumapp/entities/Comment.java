@@ -11,6 +11,8 @@ import org.hibernate.annotations.OnDeleteAction;
 @Data
 public class Comment {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     Long id;
 
     @ManyToOne (fetch = FetchType.LAZY) // many-> commet, one -> bir post altında bir sürü comment olabilir

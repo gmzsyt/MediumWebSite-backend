@@ -42,14 +42,17 @@ public class CommentService {
     public Comment createOneComment(CommentCreateRequest newCommentRequest) {
         User user = userService.getOneUser(newCommentRequest.getUserId());
         Post post = postService.getOnePostById(newCommentRequest.getPostId());
-        if(post ==null || user == null) return null;
+
+        if (post == null || user == null) return null;
+
         Comment comment = new Comment();
-        comment.setId(newCommentRequest.getId());
         comment.setText(newCommentRequest.getText());
         comment.setUser(user);
         comment.setPost(post);
+
         return commentRepository.save(comment);
     }
+
 
     public Comment updateOneComment(Long commentId, CommentUpdateRequest updateCommentRequest) {
         Comment comment = getOneComment(commentId);

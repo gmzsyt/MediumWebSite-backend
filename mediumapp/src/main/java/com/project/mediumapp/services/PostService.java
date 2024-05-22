@@ -24,10 +24,12 @@ public class PostService {
         if (userId.isPresent()){
             System.out.println("userId var" + userId);
             return postRepository.findByUserId(userId.get());
-        }
-        else
+        } else {
             return postRepository.findAll();
+            // Kullanıcı adını içerecek şekilde her bir postun kullanıcı bilgisini doldur
+        }
     }
+
 
     public Post getOnePostById(Long postId) {
         return postRepository.findById(postId).orElse(null);
@@ -45,7 +47,6 @@ public class PostService {
         toSave.setTitle(newPostRequest.getTitle());
         toSave.setUser(user);
         return postRepository.save(toSave);
-
     }
 
 
