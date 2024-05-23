@@ -28,7 +28,6 @@ public class PostController {
     }
     @GetMapping("/{postId}")
     public ResponseEntity<PostRequest> getOnePost (@PathVariable Long postId){
-
         Post post = postService.getOnePostById(postId);
         PostRequest postRequest = postService.convertToPostRequest(post);
         return ResponseEntity.ok(postRequest);

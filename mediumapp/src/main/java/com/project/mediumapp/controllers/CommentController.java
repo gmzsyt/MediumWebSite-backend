@@ -2,6 +2,7 @@ package com.project.mediumapp.controllers;
 
 import com.project.mediumapp.entities.Comment;
 import com.project.mediumapp.requests.CommentCreateRequest;
+import com.project.mediumapp.requests.CommentRequest;
 import com.project.mediumapp.requests.CommentUpdateRequest;
 import com.project.mediumapp.services.CommentService;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class CommentController {
     }
     @GetMapping
 
-    public List<Comment> getAllComments(@RequestParam Optional<Long> userId, @RequestParam Optional<Long> postId){
+    public List<CommentRequest> getAllComments(@RequestParam Optional<Long> userId, @RequestParam Optional<Long> postId){
         return commentService.getAllPosts(userId,postId);
     }
 
