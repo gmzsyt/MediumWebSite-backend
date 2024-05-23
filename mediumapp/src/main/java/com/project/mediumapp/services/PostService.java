@@ -4,11 +4,13 @@ import com.project.mediumapp.entities.Post;
 import com.project.mediumapp.entities.User;
 import com.project.mediumapp.repositories.PostRepository;
 import com.project.mediumapp.requests.PostCreateRequest;
+import com.project.mediumapp.requests.PostRequest;
 import com.project.mediumapp.requests.PostUpdateRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService {
@@ -20,14 +22,26 @@ public class PostService {
         this.userService = userService;
     }
 
-    public List<Post> getAllPosts(Optional<Long> userId) {
+    public List<PostRequest> getAllPosts(Optional<Long> userId) {
+        List<Post> posts;
+
         if (userId.isPresent()){
-            System.out.println("userId var" + userId);
-            return postRepository.findByUserId(userId.get());
+            posts = postRepository.findByUserId(userId.get());
         } else {
-            return postRepository.findAll();
-            // Kullanıcı adını içerecek şekilde her bir postun kullanıcı bilgisini doldur
+            posts = postRepository.findAll();
         }
+
+        return posts.stream()
+                .map(this::convertToPostRequest) // her bir post nesnesini aşağıdaki metoda geçirir ve sonuçları bir liste olarak toplar.
+                .collect(Collectors.toList());
+    }
+    private PostRequest convertToPostRequest(Post post) {
+        PostRequest postRequest = new PostRequest();
+        postRequest.setId(post.getId());
+        postRequest.setTitle(post.getTitle());
+        postRequest.setText(post.getText());
+        postRequest.setUserName(post.getUser().getUserName());
+        return postRequest;
     }
 
 

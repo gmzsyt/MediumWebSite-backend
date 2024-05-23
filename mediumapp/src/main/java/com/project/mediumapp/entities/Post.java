@@ -17,9 +17,12 @@ public class Post {
 
     Long id;
 
+
     @ManyToOne (fetch = FetchType.LAZY) // many-> post, one -> user --- LAZY-> post işlemleriyle beraber user gelmesin diye
     @JoinColumn (name = "user_id",nullable = false) // user nesnesi user_id için yapıldı demek istiyorum ve false olamasın diyorum
     @OnDelete(action = OnDeleteAction.CASCADE) // user silindiğinde postlar da silinsin diyoruz
+    @JsonIgnore
+
     User user;
 
     String title;

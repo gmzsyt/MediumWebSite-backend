@@ -3,6 +3,7 @@ package com.project.mediumapp.controllers;
 import com.project.mediumapp.entities.Post;
 import com.project.mediumapp.repositories.PostRepository;
 import com.project.mediumapp.requests.PostCreateRequest;
+import com.project.mediumapp.requests.PostRequest;
 import com.project.mediumapp.requests.PostUpdateRequest;
 import com.project.mediumapp.services.PostService;
 import org.springframework.web.bind.annotation.*;
@@ -21,10 +22,9 @@ public class PostController {
     }
     @GetMapping
 
-    public List<Post> getAllPosts (@RequestParam Optional<Long> userId){
+    public List<PostRequest> getAllPosts(@RequestParam Optional<Long> userId) {
         return postService.getAllPosts(userId);
     }
-
     @GetMapping("/{postId}")
     public Post getOnePost (@PathVariable Long postId){
         return postService.getOnePostById(postId);
