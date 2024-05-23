@@ -35,7 +35,7 @@ public class PostService {
                 .map(this::convertToPostRequest) // her bir post nesnesini aşağıdaki metoda geçirir ve sonuçları bir liste olarak toplar.
                 .collect(Collectors.toList());
     }
-    private PostRequest convertToPostRequest(Post post) {
+     public PostRequest convertToPostRequest(Post post) {
         PostRequest postRequest = new PostRequest();
         postRequest.setId(post.getId());
         postRequest.setTitle(post.getTitle());

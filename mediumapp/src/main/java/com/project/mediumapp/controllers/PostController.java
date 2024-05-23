@@ -6,6 +6,7 @@ import com.project.mediumapp.requests.PostCreateRequest;
 import com.project.mediumapp.requests.PostRequest;
 import com.project.mediumapp.requests.PostUpdateRequest;
 import com.project.mediumapp.services.PostService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,8 +27,11 @@ public class PostController {
         return postService.getAllPosts(userId);
     }
     @GetMapping("/{postId}")
-    public Post getOnePost (@PathVariable Long postId){
-        return postService.getOnePostById(postId);
+    public ResponseEntity<PostRequest> getOnePost (@PathVariable Long postId){
+
+        Post post = postService.getOnePostById(postId);
+        PostRequest postRequest = postService.convertToPostRequest(post);
+        return ResponseEntity.ok(postRequest);
     }
 
     @PostMapping
